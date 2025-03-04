@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.WebCodecs", "WebSharper.WebCodecs\WebSharper.WebCodecs.fsproj", "{FA48B330-86BB-4D93-93BF-A48D4945A159}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.WebCodecs.Sample", "WebSharper.WebCodecs.Sample\WebSharper.WebCodecs.Sample.fsproj", "{9CC837C2-16D7-4569-98DA-E24F5954E46E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA48B330-86BB-4D93-93BF-A48D4945A159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA48B330-86BB-4D93-93BF-A48D4945A159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA48B330-86BB-4D93-93BF-A48D4945A159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA48B330-86BB-4D93-93BF-A48D4945A159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC837C2-16D7-4569-98DA-E24F5954E46E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC837C2-16D7-4569-98DA-E24F5954E46E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC837C2-16D7-4569-98DA-E24F5954E46E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC837C2-16D7-4569-98DA-E24F5954E46E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04A154E9-0609-4E72-836A-90CBC6CB0C2D}
+	EndGlobalSection
+EndGlobal
