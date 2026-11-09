@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #f6f7fb;
   --surface: #ffffff;
   --border: #e2e5ee;
@@ -12,20 +12,6 @@
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1420;
-    --surface: #171d2b;
-    --border: #2a3348;
-    --text: #e7eaf2;
-    --muted: #9aa4b8;
-    --primary: #7c74f5;
-    --primary-hover: #918bff;
-    --primary-text: #0f1420;
-    --code-bg: #101725;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.35);
-  }
-}
 
 * {
   box-sizing: border-box;

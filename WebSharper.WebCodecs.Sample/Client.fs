@@ -119,10 +119,9 @@ module Client =
     let Main () =
         refreshSupport ()
 
-        IndexTemplate.Main()
+        IndexTemplate()
             .encodeFrame(fun _ -> encodeFrame ())
             .status(status.V)
             .result(result.V)
             .support(support.V)
-            .Doc()
-        |> Doc.RunById "main"
+            .Bind()
