@@ -5,6 +5,8 @@ open WebSharper.JavaScript
 open WebSharper.JavaScript.Dom
 open WebSharper.InterfaceGenerator
 
+#nowarn "3886" // single-element Required/Optional lists are intentional
+
 module Definition =
 
     let TypedArray = T<Int8Array> + T<Uint8Array> + T<Uint8ClampedArray> + T<Int16Array> + T<Uint16Array>
@@ -100,13 +102,14 @@ module Definition =
 
     let EncodedAudioChunkInit =
         Pattern.Config "EncodedAudioChunkInit" {
-            Required = []
-            Optional = [
-                "duration", T<int> // Duration in microseconds
+            Required = [
                 "type", T<string> // Indicates if this chunk is a key chunk
                 "timestamp", T<int> // Timestamp in microseconds
                 "data", TypedArray // Encoded audio data
-                "transfer", !|T<ArrayBuffer>
+            ]
+            Optional = [
+                "duration", T<int> // Duration in microseconds
+                "transfer", !|T<ArrayBuffer> // Array of ArrayBuffers to transfer ownership
             ]
         }
 
@@ -124,9 +127,18 @@ module Definition =
             "copyTo" => BufferData?destination ^-> T<unit> // Copies encoded audio data
         ]
 
-    let EncodedVideoChunkInit = 
-        Class "EncodedVideoChunkInit"
-        |=> Inherits EncodedAudioChunkInit
+    let EncodedVideoChunkInit =
+        Pattern.Config "EncodedVideoChunkInit" {
+            Required = [
+                "type", T<string> // Indicates if this chunk is a key chunk
+                "timestamp", T<int> // Timestamp in microseconds
+                "data", TypedArray // Encoded video data
+            ]
+            Optional = [
+                "duration", T<int> // Duration in microseconds
+                "transfer", !|T<ArrayBuffer> // Array of ArrayBuffers to transfer ownership
+            ]
+        }
 
     let EncodedVideoChunk =
         Class "EncodedVideoChunk"
@@ -194,10 +206,18 @@ module Definition =
             ]
         }
 
+    let EncodedAudioChunkMetadata =
+        Pattern.Config "EncodedAudioChunkMetadata" {
+            Required = []
+            Optional = [
+                "decoderConfig", AudioDecoderConfig.Type // Decoder configuration
+            ]
+        }
+
     let AudioEncoderInit =
         Pattern.Config "AudioEncoderInit" {
             Required = [
-                "output", EncodedAudioChunk?firstArg * !?AudioDecoderConfig?secondArg ^-> T<unit>  // Function to handle output chunks (callback)
+                "output", EncodedAudioChunk?firstArg * !?EncodedAudioChunkMetadata?secondArg ^-> T<unit>  // Function to handle output chunks (callback)
                 "error", T<obj>?error ^-> T<unit> // Function to handle errors (callback)
             ]
             Optional = []
@@ -472,8 +492,8 @@ module Definition =
             |> WithSourceName "OnDequeue"
         ]
 
-    let VideoEncoderMetadata =
-        Pattern.Config "VideoEncoderMetadata" {
+    let EncodedVideoChunkMetadata =
+        Pattern.Config "EncodedVideoChunkMetadata" {
             Required = []
             Optional = [
                 "decoderConfig", VideoDecoderConfig.Type // Decoder configuration (needs a separate binding)
@@ -485,7 +505,7 @@ module Definition =
     let VideoEncoderInit =
         Pattern.Config "VideoEncoderInit" {
             Required = [
-                "output", (EncodedVideoChunk?chunk * !?VideoEncoderMetadata?metadata) ^-> T<unit> // Output callback
+                "output", (EncodedVideoChunk?chunk * !?EncodedVideoChunkMetadata?metadata) ^-> T<unit> // Output callback
                 "error", T<obj>?error ^-> T<unit> // Error callback
             ]
             Optional = []
@@ -586,7 +606,7 @@ module Definition =
                 CodecQuantizer
                 VideoEncoderConfig
                 VideoEncoderInit
-                VideoEncoderMetadata
+                EncodedVideoChunkMetadata
                 VideoDecoder
                 VideoDecoderInit
                 VideoDecoderConfig
@@ -598,6 +618,7 @@ module Definition =
                 CopyToOptions
                 AudioData
                 OpusEncoderConfig
+                EncodedAudioChunkMetadata
             ]
         ]
 

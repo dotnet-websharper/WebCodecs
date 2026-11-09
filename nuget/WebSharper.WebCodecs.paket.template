@@ -1,0 +1,20 @@
+type file
+id WebSharper.WebCodecs
+authors
+    IntelliFactory
+owners
+    IntelliFactory
+repositoryType git
+repositoryUrl https://github.com/dotnet-websharper/WebCodecs/
+licenseUrl https://github.com/dotnet-websharper/WebCodecs/blob/main/LICENSE.md
+iconUrl https://github.com/dotnet-websharper/core/raw/websharper50/tools/WebSharper.png
+projectUrl https://github.com/dotnet-websharper/WebCodecs
+description
+    WebSharper bindings for WebCodecs
+tags
+    Web JavaScript F# C#
+files
+    ../WebSharper.WebCodecs/bin/Release/netstandard2.0/WebSharper.WebCodecs.dll ==> lib/netstandard2.0
+    ../WebSharper.WebCodecs/bin/Release/netstandard2.0/WebSharper.WebCodecs.xml ==> lib/netstandard2.0
+dependencies
+        WebSharper ~> LOCKEDVERSION:[3]
