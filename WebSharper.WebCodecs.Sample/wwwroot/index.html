@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>WebCodecs API</title>
+    <title>WebSharper WebCodecs API Demo</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%234f46e5'/%3E%3Cpath d='M4 5.5 8 8l-4 2.5z' fill='white'/%3E%3Crect x='9' y='5' width='3' height='6' rx='1' fill='white'/%3E%3C/svg%3E" />
     <link rel="stylesheet" type="text/css" href="Content/WebSharper.WebCodecs.Sample.css" />
+    <link rel="stylesheet" type="text/css" href="site.css" />
     <style>
         /* Don't show the not-yet-loaded templates */
         [ws-template], [ws-children-template] { display: none; }
@@ -12,13 +14,35 @@
     <script type="module" src="Content/WebSharper.WebCodecs.Sample.head.js"></script>
 </head>
 <body>
-    <h1>WebCodecs API - Encode a Frame</h1>
-    <div id="main" ws-children-template="Main">
-        <canvas id="canvas" width="640" height="360"></canvas>
-        <br />
-        <button ws-onclick="EncodeFrame">Encode Frame</button>
-        <p ws-replace="EncodeResult"></p>
-    </div>
+    <main class="page">
+        <header class="hero">
+            <h1>WebCodecs API Demo</h1>
+            <p class="lede">
+                Draw a frame on a canvas and encode it with
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API" target="_blank" rel="noreferrer">WebCodecs</a>
+                <code>VideoEncoder</code> — low-level, frame-by-frame media processing in the browser.
+            </p>
+        </header>
+
+        <div id="main" ws-children-template="Main">
+            <section class="card">
+                <h2>Frame</h2>
+                <p class="hint">The canvas is the source of the <code>VideoFrame</code> that gets encoded (codec <code>vp8</code>).</p>
+                <canvas id="canvas" width="640" height="360"></canvas>
+                <div class="actions">
+                    <button class="btn btn-primary" ws-onclick="encodeFrame">Encode frame</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Result</h2>
+                <p class="hint">The encoder's output callback reports the resulting <code>EncodedVideoChunk</code>.</p>
+                <pre class="preview">${result}</pre>
+                <p class="status" role="status">${status}</p>
+                <p class="capabilities">${support}</p>
+            </section>
+        </div>
+    </main>
     <script type="module" src="Content/WebSharper.WebCodecs.Sample.min.js"></script>
 </body>
 </html>
